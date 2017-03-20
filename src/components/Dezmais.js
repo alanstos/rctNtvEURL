@@ -32,7 +32,7 @@ export default class Dezmais extends Component {
               this.setState( {lista: response });
               
             });
-          }else {
+          }else { 
             Alert.alert('Dados inválidos', responseData.status.toString())
           }
     }).catch((error) => {

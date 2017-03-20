@@ -8,9 +8,9 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { Actions } from 'react-native-router-flux';
+import { Router, Scene } from 'react-native-router-flux';
 
-export default class Principal extends Component {
+export default class rctNtvEURL extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -18,24 +18,17 @@ export default class Principal extends Component {
           ENCURTADOR DE URL
         </Text>
 
-        <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressCriar }>
-          <Text style={styles.estiloTexto}>Criar</Text>
-        </TouchableOpacity>   
-
-        <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressDezMais }>
-          <Text style={styles.estiloTexto}>Dez mais</Text>
-        </TouchableOpacity>                
+        <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressButton }>
+          <Text style={styles.estiloTexto}>Simplificar URL</Text>
+        </TouchableOpacity>           
       </View>
     );
   }
 }
 
-const _onPressCriar = () => {
-  Actions.Criar();
-}
-
-const _onPressDezMais = () => {
-   Actions.Dezmais();
+const _onPressButton = () => {
+ 
+  Alert.alert( ' Incompleto ainda ' );
 }
 
 const styles = StyleSheet.create({
@@ -48,17 +41,16 @@ const styles = StyleSheet.create({
   estiloTextoMain : {
     color: '#FFF',
     fontWeight : 'bold',
-    fontSize: 22,
+    fontSize: 20,
     borderColor : '#FFF',
     borderWidth : 2,
-    padding : 16
+    padding : 14
   },  
   estiloBotao : {
     marginTop : 15,
     backgroundColor: '#FFF',
-    paddingHorizontal: 40,
-    paddingVertical: 10,    
-    borderRadius: 5
+    paddingHorizontal: 30,
+    paddingVertical: 5,    
   },
   estiloTexto : {
     color: '#1f8dd6',
@@ -68,3 +60,4 @@ const styles = StyleSheet.create({
   
 });
 
+AppRegistry.registerComponent('rctNtvEURL', () => rctNtvEURL);
