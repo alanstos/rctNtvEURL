@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     paddingHorizontal: 40,
     paddingVertical: 10,    
-    borderRadius: 5
+    borderRadius: 5,
+    width:200,
+    alignItems: 'center'
   },
   estiloTexto : {
     color: '#1f8dd6',

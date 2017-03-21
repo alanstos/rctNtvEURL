@@ -26,9 +26,4 @@ export default class rctNtvEURL extends Component {
   }
 }
 
-
-const styles = StyleSheet.create({
-  
-});
-
 AppRegistry.registerComponent('rctNtvEURL', () => rctNtvEURL);

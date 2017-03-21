@@ -23,18 +23,12 @@ export default class Criar extends Component {
 
   _cadastrar = () => {
 
-    console.log(this.state.url);
-    console.log(this.state.alias);
-
-    
-    var dado = {
+    let dado = {
         url: this.state.url,
         CUSTOM_ALIAS: this.state.alias
         }; 
 
-        console.log(dado)   ;
-
-        console.log(  JSON.stringify( dado ) )   ;
+    console.log(dado);
 
     fetch("http://e-url-alan.herokuapp.com/encurtar/criacao", {
         method: "put",
@@ -42,7 +36,7 @@ export default class Criar extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify( { 'url' : 'teste123', 'CUSTOM_ALIAS' : '123' ,} )
+        body: JSON.stringify( dado )
       })
     .then((responseData) => {
         console.log(responseData);
@@ -51,53 +45,42 @@ export default class Criar extends Component {
 
             console.log(response);
             
-              this.setState( {urlShort: response.url });
+            this.setState( {urlShort: response.url });
 
           });
         }else {Alert.alert('Dados inválidos', responseData.status.toString())}
     }).catch((error) => {
         console.log(error);
     }).done();
-  }  
-
-  cadastrar = () => {
-      Alert.alert('url', this.state.url + ' ' + this.state.alias);
-      
-  }  
-
+  } 
 
   render() {
     return (
 
-        <View>
+        <View style={[styles.form]}>
           <View>
-            <Text>URL</Text>
+            <Text style={[styles.label]}>URL</Text>
             <TextInput style={[styles.input]}
               placeholder="Digite aqui seu link"
               onChangeText={(text) => this.setState({url: text})}
             />   
 
-            <Text>Alias</Text>
+            <Text style={[styles.label]}>Alias</Text>
             <TextInput style={[styles.input]}
               placeholder="Seu alias personalizado"
               onChangeText={(text) => this.setState({alias: text})}
             />               
 
-            <Button color={'#ffcc00'} title={'Gerar'} onPress={() => this._cadastrar() } />   
+            <Button color={'#2d3e50'} title={'Gerar'} onPress={() => this._cadastrar() } />   
           </View>
 
-          <View>
-            <Text>{this.state.urlShort}</Text>
+          <View style={[styles.form]} >
+            <Text style={ styles.urlShort }>{this.state.urlShort}</Text>
           </View>                    
         </View>          
     );
   }
-
-
-
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -112,11 +95,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderColor: 'transparent',
   },
+  urlShort :{
+    fontSize: 16,
+    color:'#d11818',
+  },
   form: {
     margin: 20
   },
   label: {
-    color:'#ffcc00',
+    color:'#2d3e50',
     fontSize: 16,
     marginBottom: 40,
     textAlign: 'center'
