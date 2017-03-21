@@ -21,40 +21,6 @@ export default class Criar extends Component {
     this.state = { url: '', alias: '', urlShort:'' };
   }
 
-  _cadastrarAx = () => {
-
-    
-    let dado = {
-        url: this.state.url,
-        customAlias: this.state.alias
-        }; 
-
-        console.log(dado)   ;
-
-        console.log(  JSON.stringify( dado ) )   ;    
-        
-    axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-    axios.post('http://e-url-alan.herokuapp.com/encurtar/criar', JSON.stringify( dado )  )
-      .then(function(responseData){
-        console.log(responseData);
-        console.log('salvo com sucesso');
-
-
-        console.log(responseData);
-        if (responseData.status == 200) {
-
-            console.log(responseData.data);
-            
-            this.setState( {urlShort: responseData.data.url });
-
-          
-        }else {Alert.alert('Dados inválidos', responseData.status.toString())}
-
-      })
-      .catch( (error) => { console.log('erro '); console.log( error ); } );           
-
-  }
-
   _cadastrar = () => {
 
     console.log(this.state.url);
@@ -63,20 +29,20 @@ export default class Criar extends Component {
     
     var dado = {
         url: this.state.url,
-        customAlias: this.state.alias
+        CUSTOM_ALIAS: this.state.alias
         }; 
 
         console.log(dado)   ;
 
         console.log(  JSON.stringify( dado ) )   ;
 
-    fetch("http://e-url-alan.herokuapp.com/encurtar/criar", {
+    fetch("http://e-url-alan.herokuapp.com/encurtar/criacao", {
         method: "put",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify( { 'url' : 'teste', 'customAlias' : '' ,} )
+        body: JSON.stringify( { 'url' : 'teste123', 'CUSTOM_ALIAS' : '123' ,} )
       })
     .then((responseData) => {
         console.log(responseData);
@@ -117,7 +83,7 @@ export default class Criar extends Component {
               onChangeText={(text) => this.setState({alias: text})}
             />               
 
-            <Button color={'#ffcc00'} title={'Gerar'} onPress={() => this._cadastrarAx() } />   
+            <Button color={'#ffcc00'} title={'Gerar'} onPress={() => this._cadastrar() } />   
           </View>
 
           <View>
