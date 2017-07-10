@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -34,28 +34,28 @@ export default class Dezmais extends Component {
               console.log(response);
 
               this.setState( {lista: response,visible: !this.state.visible });
-              
+
             });
-          }else { 
+          }else {
             this.setState({visible: !this.state.visible});
             Alert.alert('Dados inválidos', responseData.status.toString());
           }
     }).catch((error) => {
         console.log(error);
         this.setState({visible: !this.state.visible});
-    }).done();    
-    
+    }).done();
+
   }
 
   render() {
     return (
         <ScrollView>
-          <Spinner visible={this.state.visible} textContent={"Carregando..."} textStyle={{color: '#000'}} />   
-          
-          { 
-            this.state.lista.map( (urls) => 
-              (<Item key={urls.alias} urls={urls} />) 
-            ) 
+          <Spinner visible={this.state.visible} textContent={"Carregando..."} textStyle={{color: '#000'}} />
+
+          {
+            this.state.lista.map( (urls) =>
+              (<Item key={urls.alias} urls={urls} />)
+            )
           }
 
         </ScrollView>

@@ -23,27 +23,7 @@ export default class Principal extends Component {
     AdMobRewarded.setTestDeviceID('EMULATOR');
     AdMobRewarded.setAdUnitID('ca-app-pub-2112706098723938/5545526807');
 
-    AdMobRewarded.addEventListener('rewardedVideoDidRewardUser',
-      (type, amount) => console.log('rewardedVideoDidRewardUser', type, amount)
-    );
-    AdMobRewarded.addEventListener('rewardedVideoDidLoad',
-      () => console.log('rewardedVideoDidLoad')
-    );
-    AdMobRewarded.addEventListener('rewardedVideoDidFailToLoad',
-      (error) => console.log('rewardedVideoDidFailToLoad', error)
-    );
-    AdMobRewarded.addEventListener('rewardedVideoDidOpen',
-      () => console.log('rewardedVideoDidOpen')
-    );
-    AdMobRewarded.addEventListener('rewardedVideoDidClose',
-      () => {
-        console.log('rewardedVideoDidClose');
-        AdMobRewarded.requestAd((error) => error && console.log(error));
-      }
-    );
-    AdMobRewarded.addEventListener('rewardedVideoWillLeaveApplication',
-      () => console.log('rewardedVideoWillLeaveApplication')
-    );
+
 
     AdMobRewarded.requestAd((error) => error && console.log(error));
   }
@@ -61,27 +41,11 @@ export default class Principal extends Component {
     return (
       <View style={styles.container}>
 
-      <AdMobBanner
-        bannerSize="banner"
-        adUnitID="ca-app-pub-2112706098723938/5545526807"
-        testDeviceID="EMULATOR"
-         didFailToReceiveAdWithError={(error) => console.log(error)}
-         />
 
-         <PublisherBanner
-  bannerSize="fullBanner"
-  adUnitID="ca-app-pub-2112706098723938/9417323202"
-  testDeviceID="EMULATOR"
-  didFailToReceiveAdWithError={(error) => console.log(error)}
-  admobDispatchAppEvent={(error) => console.log(error)} />
 
         <Text style={styles.estiloTextoMain}>
           ENCURTADOR DE URL
         </Text>
-
-        <Text onPress={this.showRewarded} style={styles.button}>
-     Show Rewarded Video and preload next
-   </Text>
 
         <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressCriar }>
           <Text style={styles.estiloTexto}>Criar</Text>
@@ -135,8 +99,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight : 'bold',
   },
-  button: {
-    color: '#333333',
-    marginBottom: 15,
-  },
+
 });

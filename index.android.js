@@ -4,26 +4,101 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
-  TouchableOpacity
+  Platform,
+  TouchableHighlight,
 } from 'react-native';
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'react-native-admob'
 
-import { Router, Scene } from 'react-native-router-flux';
+export default class Example extends Component {
 
-import Principal from './src/components/Principal';
-import Criar from './src/components/Criar';
-import Dezmais from './src/components/Dezmais';
+  componentDidMount() {
+    AdMobRewarded.setTestDeviceID('EMULATOR');
+    AdMobRewarded.setAdUnitID('ca-app-pub-2112706098723938/9417323202');
 
-export default class rctNtvEURL extends Component {
+    AdMobRewarded.addEventListener('rewardedVideoDidRewardUser',
+      (type, amount) => console.log('rewardedVideoDidRewardUser', type, amount)
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidLoad',
+      () => console.log('rewardedVideoDidLoad')
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidFailToLoad',
+      (error) => console.log('rewardedVideoDidFailToLoad', error)
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidOpen',
+      () => console.log('rewardedVideoDidOpen')
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidClose',
+      () => {
+        console.log('rewardedVideoDidClose');
+        AdMobRewarded.requestAd((error) => error && console.log(error));
+      }
+    );
+    AdMobRewarded.addEventListener('rewardedVideoWillLeaveApplication',
+      () => console.log('rewardedVideoWillLeaveApplication')
+    );
+
+    AdMobRewarded.requestAd((error) => error && console.log(error));
+  }
+
+  componentWillUnmount() {
+    AdMobRewarded.removeAllListeners();
+  }
+
+  showRewarded() {
+    AdMobRewarded.showAd((error) => error && console.log(error));
+  }
+
   render() {
     return (
-      <Router sceneStyle={{ paddingTop:50}}>
-        <Scene key='Principal' component={Principal} initil title="E-url" />
-        <Scene key='Criar' component={Criar} initil title="Criar" />
-        <Scene key='Dezmais' component={Dezmais} initil title="Dez mais" />
-      </Router>
+      <View style={styles.container}>
+        <View style={{ flex: 1 }}>
+
+        <AdMobBanner
+          bannerSize="banner"
+          adUnitID="ca-app-pub-2112706098723938/5545526807"
+          testDeviceID="EMULATOR"
+          didFailToReceiveAdWithError={() => console.log('error aqui - topo')} />
+
+          <TouchableHighlight>
+            <Text onPress={this.showRewarded} style={styles.button}>
+              Show Rewarded Video and preload next
+            </Text>
+          </TouchableHighlight>
+
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-2112706098723938/9417323202"
+            testDeviceID="EMULATOR"
+            didFailToReceiveAdWithError={() => console.log('error aqui - bottom')} />
+
+            <TouchableHighlight>
+              <Text onPress={this.showRewarded} style={styles.button}>
+                Show Rewarded Video and preload next
+              </Text>
+            </TouchableHighlight>
+
+        </View>
+      </View>
     );
   }
 }
 
-AppRegistry.registerComponent('rctNtvEURL', () => rctNtvEURL);
+const styles = StyleSheet.create({
+  container: {
+    marginTop: (Platform.OS === 'ios') ? 30 : 10,
+    flex: 1,
+    alignItems: 'center',
+  },
+  button: {
+    color: '#333333',
+    marginBottom: 15,
+  },
+});
+
+
+AppRegistry.registerComponent('rctNtvEURL', () => Example);

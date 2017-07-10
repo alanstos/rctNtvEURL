@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component , PropTypes} from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -24,7 +24,7 @@ import {
             <Text>Original: {this.props.urls.urlOriginal}</Text>
           </View>
         </View>
-        
+
     );
   }
 }
@@ -32,7 +32,7 @@ import {
 
 const styles = StyleSheet.create({
     item:{
-      borderBottomWidth :2, 
+      borderBottomWidth :2,
       borderColor:'#CCC',
       paddingBottom: 5,
       paddingTop: 5,

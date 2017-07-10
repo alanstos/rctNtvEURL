@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -29,14 +29,14 @@ export default class Criar extends Component {
     if (this.state.url == ''){
       Alert.alert('Ops', 'Eu preciso da URL');
 
-    }else { 
+    }else {
 
       console.log('URL ok');
 
       let dado = {
           url: this.state.url,
           CUSTOM_ALIAS: this.state.alias
-          }; 
+          };
 
       console.log(dado);
 
@@ -56,7 +56,7 @@ export default class Criar extends Component {
             (responseData.json()).then((response) => {
 
               console.log(response);
-              
+
               this.setState( {urlShort: response.url,visible: !this.state.visible });
 
             });
@@ -67,7 +67,7 @@ export default class Criar extends Component {
       }).done();
 
     }
-  } 
+  }
 
   render() {
     return (
@@ -78,24 +78,24 @@ export default class Criar extends Component {
             <TextInput style={[styles.input]}
               placeholder="Digite aqui seu link"
               onChangeText={(text) => this.setState({url: text})}
-            />   
+            />
 
             <Text style={[styles.label]}>Alias</Text>
             <TextInput style={[styles.input]}
               placeholder="Seu alias personalizado"
               onChangeText={(text) => this.setState({alias: text})}
-            />               
+            />
 
-            <Button color={'#2d3e50'} title={'Gerar'} onPress={() => this._cadastrar() } />   
+            <Button color={'#2d3e50'} title={'Gerar'} onPress={() => this._cadastrar() } />
           </View>
 
           <View style={[styles.form]} >
             <Text style={[styles.urlShort]}>{this.state.urlShort}</Text>
-          </View>     
+          </View>
 
-          <Spinner visible={this.state.visible} textContent={"Gerando..."} textStyle={{color: '#000'}} />   
-           
-        </ScrollView>          
+          <Spinner visible={this.state.visible} textContent={"Gerando..."} textStyle={{color: '#000'}} />
+
+        </ScrollView>
     );
   }
 }
@@ -127,4 +127,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
-
