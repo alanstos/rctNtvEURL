@@ -10,10 +10,51 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'react-native-admob'
+
 export default class Principal extends Component {
+
+  _componentDidMount() {
+    //AdMobRewarded.setTestDeviceID('EMULATOR');
+    AdMobRewarded.setAdUnitID('ca-app-pub-2112706098723938/5545526807');
+
+    AdMobRewarded.addEventListener('rewardedVideoDidRewardUser',
+      (type, amount) => console.log('rewardedVideoDidRewardUser', type, amount)
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidLoad',
+      () => console.log('rewardedVideoDidLoad')
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidFailToLoad',
+      (error) => console.log('rewardedVideoDidFailToLoad', error)
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidOpen',
+      () => console.log('rewardedVideoDidOpen')
+    );
+    AdMobRewarded.addEventListener('rewardedVideoDidClose',
+      () => {
+        console.log('rewardedVideoDidClose');
+        AdMobRewarded.requestAd((error) => error && console.log(error));
+      }
+    );
+    AdMobRewarded.addEventListener('rewardedVideoWillLeaveApplication',
+      () => console.log('rewardedVideoWillLeaveApplication')
+    );
+
+    AdMobRewarded.requestAd((error) => error && console.log(error));
+  }
+
+  componentWillUnmount() {
+    AdMobRewarded.removeAllListeners();
+  }
+
   render() {
     return (
-      <View>
+      <View style={ styles.geral }>
         <View style={styles.container}>
           <Text style={styles.estiloTextoMain}>
             ENCURTADOR DE URL
@@ -28,7 +69,15 @@ export default class Principal extends Component {
           </TouchableOpacity>
         </View>
         <View>
-          <Text>Fim</Text>
+            <Text>.</Text>
+          <AdMobBanner
+            bannerSize="mediumRectangle"
+            adUnitID="ca-app-pub-2112706098723938/5545526807"
+      
+             didFailToReceiveAdWithError={() => alert('erro')}
+             />
+            <Text>.</Text>
+
         </View>
       </View>
     );
@@ -72,5 +121,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight : 'bold',
   },
+  geral : {
+    flex: 1,
+  }
 
 });
