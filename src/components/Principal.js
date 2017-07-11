@@ -13,18 +13,23 @@ import { Actions } from 'react-native-router-flux';
 export default class Principal extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.estiloTextoMain}>
-          ENCURTADOR DE URL
-        </Text>
+      <View>
+        <View style={styles.container}>
+          <Text style={styles.estiloTextoMain}>
+            ENCURTADOR DE URL
+          </Text>
 
-        <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressCriar }>
-          <Text style={styles.estiloTexto}>Criar</Text>
-        </TouchableOpacity>   
+          <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressCriar }>
+            <Text style={styles.estiloTexto}>Criar</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressDezMais }>
-          <Text style={styles.estiloTexto}>Dez mais</Text>
-        </TouchableOpacity>                
+          <TouchableOpacity style={ styles.estiloBotao } onPress={ _onPressDezMais }>
+            <Text style={styles.estiloTexto}>Dez mais</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text>Fim</Text>
+        </View>
       </View>
     );
   }
@@ -52,12 +57,12 @@ const styles = StyleSheet.create({
     borderColor : '#FFF',
     borderWidth : 2,
     padding : 16
-  },  
+  },
   estiloBotao : {
     marginTop : 15,
     backgroundColor: '#FFF',
     paddingHorizontal: 40,
-    paddingVertical: 10,    
+    paddingVertical: 10,
     borderRadius: 5,
     width:200,
     alignItems: 'center'
@@ -66,7 +71,6 @@ const styles = StyleSheet.create({
     color: '#1f8dd6',
     fontSize: 16,
     fontWeight : 'bold',
-  },    
-  
-});
+  },
 
+});
