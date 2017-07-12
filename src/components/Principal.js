@@ -68,15 +68,15 @@ export default class Principal extends Component {
             <Text style={styles.estiloTexto}>Dez mais</Text>
           </TouchableOpacity>
         </View>
-        <View>
-            <Text>.</Text>
+        <View style={{ justifyContent: 'center', flexDirection: 'row' }} >
+
           <AdMobBanner
-            bannerSize="mediumRectangle"
+            bannerSize="banner"
             adUnitID="ca-app-pub-2112706098723938/5545526807"
-      
-             didFailToReceiveAdWithError={() => alert('erro')}
+
+             didFailToReceiveAdWithError={() => console.log('erro')}
              />
-            <Text>.</Text>
+
 
         </View>
       </View>
